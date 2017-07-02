@@ -25,4 +25,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "minitest", "~> 5.0"
   spec.add_development_dependency "rubocop"
   spec.add_development_dependency "the_bath_of_zahn"
+  spec.add_development_dependency "sqlite3"
+
+  spec.add_runtime_dependency "activerecord", "~> 5.0"
 end
