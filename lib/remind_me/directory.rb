@@ -18,5 +18,17 @@ module RemindMe
     def tables
       @ar_connection.tables
     end
+
+    def classlikes
+      if @classlikes
+        return @classlikes
+      end
+
+      @classlikes =
+        files.flat_map do |file|
+          walker = RemindMe::Walker.new
+          walker.read(file)
+        end
+    end
   end
 end

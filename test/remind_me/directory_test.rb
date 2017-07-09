@@ -23,6 +23,17 @@ class DirectoryTest < Minitest::Test
     assert_includes(tables, "categories")
   end
 
+  def test_classlikes
+    directory = new_directory
+    classlikes = directory.classlikes
+
+    post = classlikes.find { |cl| cl.name == :Post }
+    category = classlikes.find { |cl| cl.name == :Category }
+
+    assert_equal(models_abspath + "/post.rb", post.filename)
+    assert_equal(models_abspath + "/category.rb", category.filename)
+  end
+
   private
 
   def new_directory

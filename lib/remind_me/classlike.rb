@@ -5,6 +5,7 @@ module RemindMe
     attr_accessor :activerecord
     attr_accessor :superclass
     attr_accessor :table_name
+    attr_accessor :filename
 
     def initialize(name,
       outerclass: nil,

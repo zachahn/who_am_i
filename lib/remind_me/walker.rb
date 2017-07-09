@@ -5,6 +5,15 @@ module RemindMe
       @classes = [@current_class]
     end
 
+    def read(file)
+      content = File.read(file)
+      sexp = Parser::CurrentRuby.parse(content)
+
+      classes(sexp).each do |klass|
+        klass.filename = file
+      end
+    end
+
     def classes(sexp)
       @current_class = Classlike.new(nil)
       @classes = [@current_class]
