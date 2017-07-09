@@ -23,12 +23,14 @@ module RemindMe
       @activerecord
     end
 
-    def to_s
+    def full_name
       if name
-        "#{outerclass}::#{name}"
+        "#{outerclass.full_name}::#{name}"
       else
         ""
       end
     end
+
+    alias_method :to_s, :full_name
   end
 end
