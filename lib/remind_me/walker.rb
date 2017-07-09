@@ -24,16 +24,8 @@ module RemindMe
     end
 
     def on_class(node)
-      class_node, subclass_node, _body_node = *node
-
-      class_name = resolve_class_name(class_node)
-
-      @current_class = Classlike.new(class_name, outerclass: @current_class)
+      @current_class = classlike_create(node, outerclass: @current_class)
       @classes.push(@current_class)
-
-      if subclass_node == explicit_activerecord_base
-        @current_class.activerecord = true
-      end
 
       process_children(node)
 
@@ -67,6 +59,23 @@ module RemindMe
 
     private
 
+    def classlike_create(node, outerclass:)
+      class_node, superclass_node, _body_node = *node
+
+      class_name = resolve_class_name(class_node)
+      superclass_name = resolve_class_name(superclass_node)
+
+      classlike = Classlike.new(class_name)
+      classlike.superclass = superclass_name
+      classlike.outerclass = outerclass
+
+      if classlike.superclass == "ActiveRecord::Base"
+        classlike.activerecord = true
+      end
+
+      classlike
+    end
+
     def resolve_class_name(node)
       outer, name = *node
 
@@ -89,11 +98,6 @@ module RemindMe
 
     def s(type, *children)
       AST::Node.new(type, children)
-    end
-
-    def explicit_activerecord_base
-      s(:const,
-        s(:const, nil, :ActiveRecord), :Base)
     end
   end
 end

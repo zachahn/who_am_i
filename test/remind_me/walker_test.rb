@@ -103,4 +103,16 @@ class WalkerTest < Minitest::Test
 
     assert_equal([true], classes.map(&:activerecord?))
   end
+
+  def test_get_full_subclass
+    model =
+      "class Post < Active::Record::Base\n" \
+      "end\n"
+
+    sexp = Parser::CurrentRuby.parse(model)
+    walker = RemindMe::Walker.new
+    klass = walker.classes(sexp).first
+
+    assert_equal("Active::Record::Base", klass.superclass)
+  end
 end
