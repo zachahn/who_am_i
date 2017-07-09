@@ -3,7 +3,7 @@ module RemindMe
     attr_accessor :name
     attr_accessor :outerclass
     attr_accessor :activerecord
-    attr_accessor :superclass
+    attr_writer :superclass
     attr_accessor :table_name
     attr_accessor :filename
 
@@ -23,12 +23,20 @@ module RemindMe
       @activerecord
     end
 
+    def superclass
+      @superclass.to_s
+    end
+
     def full_name
       if name
         "#{outerclass.full_name}::#{name}"
       else
         ""
       end
+    end
+
+    def relative_name
+      full_name[2..-1]
     end
 
     alias_method :to_s, :full_name

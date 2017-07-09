@@ -34,6 +34,15 @@ class DirectoryTest < Minitest::Test
     assert_equal(models_abspath + "/category.rb", category.filename)
   end
 
+  def test_models
+    directory = new_directory
+    models = directory.models
+
+    assert_equal(true, models.map(&:activerecord?).all?)
+    assert_includes(models.map(&:full_name), "::Post")
+    assert_includes(models.map(&:full_name), "::Category")
+  end
+
   private
 
   def new_directory
