@@ -47,7 +47,7 @@ class DirectoryTest < Minitest::Test
 
   def new_directory
     RemindMe::Directory.new(
-      models: ["test/support/models"],
+      search: ["test/support/models"],
       connection: ActiveRecord::Base.connection
     )
   end

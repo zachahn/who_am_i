@@ -2,13 +2,13 @@ module RemindMe
   class Directory
     include Enumerable
 
-    def initialize(models:, connection:)
-      @models_directory_paths = models
-      @ar_connection = connection
+    def initialize(search:, connection:)
+      @search_paths = [search].flatten
+      @activerecord_connection = connection
     end
 
     def files
-      @models_directory_paths.flat_map do |path|
+      @search_paths.flat_map do |path|
         glob = File.expand_path(File.join(path, "**", "*.rb"))
 
         Dir[glob]
@@ -16,7 +16,7 @@ module RemindMe
     end
 
     def tables
-      @ar_connection.tables
+      @activerecord_connection.tables
     end
 
     def classlikes
