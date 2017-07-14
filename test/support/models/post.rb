@@ -1,5 +1,5 @@
 class Post < ApplicationRecord
-  self.table_name = :posts
+  self.table_name = :post
 
   belongs_to :category
 end
