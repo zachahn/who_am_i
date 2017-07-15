@@ -36,26 +36,36 @@ module RemindMe
         return @models
       end
 
-      explicit_activerecord_classlikes =
-        classlikes
-          .select(&:activerecord?)
+      models = []
+      non_models = classlikes.dup
 
-      explicit_activerecords =
-        explicit_activerecord_classlikes
-          .map(&:relative_name)
+      loop do
+        previous_model_count = models.count
 
-      @models =
-        classlikes.select do |classlike|
-          explicit_activerecords.include?(classlike.superclass)
+        non_models =
+          non_models.reduce([]) do |memo, classlike|
+            if classlike.activerecord? || child_of_model?(models, classlike)
+              classlike.activerecord = true
+              models.push(classlike)
+
+              next memo
+            end
+
+            memo.push(classlike)
+          end
+
+        if previous_model_count == models.count
+          break
         end
-
-      @models.each do |model|
-        model.activerecord = true
       end
 
-      @models += explicit_activerecord_classlikes
+      @models = models
+    end
 
-      @models
+    private
+
+    def child_of_model?(models, classlike)
+      models.map(&:relative_name).include?(classlike.superclass)
     end
   end
 end
