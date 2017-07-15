@@ -28,6 +28,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "sqlite3"
   spec.add_development_dependency "pry-byebug"
   spec.add_development_dependency "m", "~> 1.5"
+  spec.add_development_dependency "appraisal"
 
   spec.add_runtime_dependency "activerecord", "~> 5.0"
   spec.add_runtime_dependency "parser"
