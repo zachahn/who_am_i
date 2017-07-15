@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.15"
   spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "minitest", "~> 5.0"
+  spec.add_development_dependency "minitest"
   spec.add_development_dependency "rubocop"
   spec.add_development_dependency "the_bath_of_zahn"
   spec.add_development_dependency "sqlite3"
@@ -30,6 +30,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "m", "~> 1.5"
   spec.add_development_dependency "appraisal"
 
-  spec.add_runtime_dependency "activerecord", "~> 5.0"
+  spec.add_runtime_dependency "activerecord", ">= 3.2", "< 5.2"
   spec.add_runtime_dependency "parser"
 end
