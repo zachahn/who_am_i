@@ -1,6 +1,6 @@
 require "test_helper"
 
-class DirectoryTest < Minitest::Test
+class DirectoryTest < TestCase
   include Migrate
 
   def setup

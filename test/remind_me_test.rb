@@ -1,4 +1,4 @@
 require "test_helper"
 
-class RemindMeTest < Minitest::Test
+class RemindMeTest < TestCase
 end

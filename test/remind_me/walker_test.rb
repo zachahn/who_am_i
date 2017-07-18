@@ -1,6 +1,6 @@
 require "test_helper"
 
-class WalkerTest < Minitest::Test
+class WalkerTest < TestCase
   def test_finds_classes
     model =
       "class Post < ActiveRecord::Base\n" \
