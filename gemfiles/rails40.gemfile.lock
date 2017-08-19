@@ -77,7 +77,7 @@ DEPENDENCIES
   appraisal
   bundler (~> 1.15)
   m (~> 1.5)
-  minitest
+  minitest (~> 4.7)
   pry-byebug
   rake (~> 10.0)
   remind_me!
@@ -86,4 +86,4 @@ DEPENDENCIES
   the_bath_of_zahn
 
 BUNDLED WITH
-   1.15.2
+   1.15.3
