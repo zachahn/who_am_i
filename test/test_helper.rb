@@ -7,7 +7,7 @@ require_relative "support/migrate"
 require "minitest/autorun"
 require "pry-byebug"
 
-if defined?(MiniTest::Unit::TestCase)
+if !defined?(Minitest::Test)
   MiniTest::Test = MiniTest::Unit::TestCase
 end
 
