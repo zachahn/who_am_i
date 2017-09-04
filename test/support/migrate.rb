@@ -1,6 +1,6 @@
 module Migrate
   def migrate!
-    support_setup_ar!
+    setup_ar!
     support_migrate!
   end
 
@@ -20,7 +20,7 @@ module Migrate
     end
   end
 
-  def support_setup_ar!
+  def setup_ar!
     ActiveRecord::Base.establish_connection(
       adapter: "sqlite3",
       database: ":memory:"
