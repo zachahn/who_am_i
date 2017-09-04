@@ -13,7 +13,7 @@ module RemindMe
     def output_header
       "# == Schema Info\n" \
       "#\n" \
-      "# Table name: post\n" \
+      "# Table name: #{@model_info.table_name}\n" \
       "#\n"
     end
 
