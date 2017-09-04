@@ -28,7 +28,7 @@ module RemindMe
         ])
       end
 
-      tt.each.to_a.join("\n") + "\n"
+      tt.map(&:rstrip).join("\n") + "\n"
     end
 
     def output_footer

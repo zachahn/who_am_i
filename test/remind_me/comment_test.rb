@@ -20,7 +20,7 @@ class CommentTest < TestCase
       "# Table name: thingamajigs\n" \
       "#\n" \
       "#   id      integer    not null, primary key\n" \
-      "#   name    string                          \n" \
+      "#   name    string\n" \
       "#\n"
 
     engine = RemindMe::Comment.new(table_name: "thingamajigs")
@@ -44,7 +44,7 @@ class CommentTest < TestCase
       "# Table name: thingamajigs\n" \
       "#\n" \
       "#   id      integer    not null, primary key\n" \
-      "#   name    string                          \n" \
+      "#   name    string\n" \
       "#\n"
 
     engine = RemindMe::Comment.new(table_name: "thingamajigs")
@@ -72,7 +72,7 @@ class CommentTest < TestCase
       "#\n" \
       "# Table name: authors\n" \
       "#\n" \
-      "#   id      integer    not null, primary key   \n" \
+      "#   id      integer    not null, primary key\n" \
       "#   name    string     not null, default (Mr F)\n" \
       "#\n"
 
@@ -82,8 +82,8 @@ class CommentTest < TestCase
       "# Table name: posts\n" \
       "#\n" \
       "#   id           integer    not null, primary key\n" \
-      "#   author_id    integer    not null             \n" \
-      "#   content      text                            \n" \
+      "#   author_id    integer    not null\n" \
+      "#   content      text\n" \
       "#\n"
 
     engine = RemindMe::Comment.new(table_name: "authors")
