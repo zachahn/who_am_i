@@ -10,10 +10,12 @@ module Migrate
         t.integer :category_id
         t.string :author
         t.text :content
+        t.timestamps
       end
 
       create_table :categories, force: true do |t|
         t.string :name
+        t.timestamps
       end
     end
   end
