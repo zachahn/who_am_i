@@ -2,6 +2,7 @@ module RemindMe
   class Comment
     def initialize(table_name:)
       @table_name = table_name
+      @model_info = ModelInfo.new(table_name)
     end
 
     def output
@@ -18,12 +19,13 @@ module RemindMe
     end
 
     def output_schema
-      tt = TextTable.new(join: " ", prefix: "#   ")
+      tt = TextTable.new(join: "    ", prefix: "#   ")
 
-      schema_info.each do |column_info|
+      @model_info.columns.each do |column_info|
         tt.push([
           column_info.name,
           column_info.type,
+          column_info.attributes.join(", "),
         ])
       end
 

@@ -11,12 +11,12 @@ class RemindMeTest < TestCase
       "#\n" \
       "# Table name: post\n" \
       "#\n" \
-      "#   id          integer \n" \
-      "#   category_id integer \n" \
-      "#   author      string  \n" \
-      "#   content     text    \n" \
-      "#   created_at  datetime\n" \
-      "#   updated_at  datetime\n" \
+      "#   id             integer     not null, primary key   \n" \
+      "#   category_id    integer                             \n" \
+      "#   author         string      not null, default (Mr F)\n" \
+      "#   content        text                                \n" \
+      "#   created_at     datetime    not null                \n" \
+      "#   updated_at     datetime    not null                \n" \
       "#\n"
 
     engine = RemindMe::Comment.new(table_name: "post")

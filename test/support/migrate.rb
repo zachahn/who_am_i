@@ -8,14 +8,14 @@ module Migrate
     ActiveRecord::Schema.define do
       create_table :post, force: true do |t|
         t.integer :category_id
-        t.string :author
+        t.string :author, null: false, default: "Mr F"
         t.text :content
-        t.timestamps
+        t.timestamps null: false
       end
 
       create_table :categories, force: true do |t|
         t.string :name
-        t.timestamps
+        t.timestamps null: false
       end
     end
   end
