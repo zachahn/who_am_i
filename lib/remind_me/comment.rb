@@ -1,7 +1,6 @@
 module RemindMe
   class Comment
     def initialize(table_name:)
-      @table_name = table_name
       @model_info = ModelInfo.new(table_name)
     end
 
@@ -34,10 +33,6 @@ module RemindMe
 
     def output_footer
       "#\n"
-    end
-
-    def schema_info
-      @schema_info ||= Function::GetSchema.new(@table_name).call
     end
   end
 end
