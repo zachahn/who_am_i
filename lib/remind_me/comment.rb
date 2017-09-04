@@ -23,7 +23,7 @@ module RemindMe
       schema_info.each do |column_info|
         tt.push([
           column_info.name,
-          column_info.sql_type_metadata.type,
+          column_info.type,
         ])
       end
 
