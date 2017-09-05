@@ -41,5 +41,9 @@ module RemindMe
         yield output_row
       end
     end
+
+    def to_s
+      map(&:rstrip).join("\n") + "\n"
+    end
   end
 end

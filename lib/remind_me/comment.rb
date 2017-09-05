@@ -28,7 +28,7 @@ module RemindMe
         ])
       end
 
-      tt.map(&:rstrip).join("\n") + "\n"
+      tt.to_s
     end
 
     def output_indices
@@ -47,7 +47,7 @@ module RemindMe
         "# Indices:\n" \
         "#\n"
 
-      header + tt.map(&:rstrip).join("\n") + "\n"
+      header + tt.to_s
     end
 
     def output_footer
