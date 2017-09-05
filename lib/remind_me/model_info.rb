@@ -20,5 +20,10 @@ module RemindMe
           ColumnInfo.new(model_class: model_class, column: column)
         end
     end
+
+    def indices
+      @indices ||=
+        model_class.connection.indexes(@table_name)
+    end
   end
 end

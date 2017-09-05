@@ -5,7 +5,7 @@ module RemindMe
     end
 
     def output
-      output_header + output_schema + output_footer
+      output_header + output_schema + output_indices + output_footer
     end
 
     private
@@ -29,6 +29,25 @@ module RemindMe
       end
 
       tt.map(&:rstrip).join("\n") + "\n"
+    end
+
+    def output_indices
+      if @model_info.indices.none?
+        return ""
+      end
+
+      tt = TextTable.new(join: "    ", prefix: "#   ")
+
+      @model_info.indices.each do |index|
+        tt.push([index.name, "(#{index.columns.join(", ")})"])
+      end
+
+      header =
+        "#\n" \
+        "# Indices:\n" \
+        "#\n"
+
+      header + tt.map(&:rstrip).join("\n") + "\n"
     end
 
     def output_footer

@@ -45,6 +45,10 @@ class CommentTest < TestCase
       "#\n" \
       "#   id      integer    not null, primary key\n" \
       "#   name    string\n" \
+      "#\n" \
+      "# Indices:\n" \
+      "#\n" \
+      "#   index_thingamajigs_on_name    (name)\n" \
       "#\n"
 
     engine = RemindMe::Comment.new(table_name: "thingamajigs")
