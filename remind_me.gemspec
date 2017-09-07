@@ -29,6 +29,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "pry-byebug"
   spec.add_development_dependency "m", "~> 1.5"
   spec.add_development_dependency "appraisal"
+  spec.add_development_dependency "foreigner"
 
   spec.add_runtime_dependency "activerecord", ">= 3.2", "< 5.2"
   spec.add_runtime_dependency "parser"

@@ -29,6 +29,8 @@ GEM
     builder (3.2.3)
     byebug (9.0.6)
     coderay (1.1.1)
+    foreigner (1.7.4)
+      activerecord (>= 3.0.0)
     i18n (0.8.6)
     m (1.5.1)
       method_source (>= 0.6.7)
@@ -73,6 +75,7 @@ DEPENDENCIES
   activerecord (= 4.2.9)
   appraisal
   bundler (~> 1.15)
+  foreigner
   m (~> 1.5)
   minitest (~> 5.10)
   pry-byebug

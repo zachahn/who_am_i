@@ -27,5 +27,12 @@ module Migrate
     )
     ActiveRecord::Base.logger = nil
     ActiveRecord::Migration.verbose = false
+
+    if Object.const_defined?("Foreigner")
+      if !$foreigner_loaded
+        Foreigner.load
+        $foreigner_loaded = true
+      end
+    end
   end
 end

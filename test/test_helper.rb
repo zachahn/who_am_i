@@ -11,5 +11,9 @@ if !defined?(Minitest::Test)
   MiniTest::Test = MiniTest::Unit::TestCase
 end
 
+if Gem::Version.new(ActiveRecord::VERSION::STRING) < Gem::Version.new("4.2")
+  require "foreigner"
+end
+
 class TestCase < Minitest::Test
 end
