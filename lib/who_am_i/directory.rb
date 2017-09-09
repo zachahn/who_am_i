@@ -1,4 +1,4 @@
-module RemindMe
+module WhoAmI
   class Directory
     include Enumerable
 
@@ -26,7 +26,7 @@ module RemindMe
 
       @classlikes =
         files.flat_map do |file|
-          walker = RemindMe::Walker.new
+          walker = WhoAmI::Walker.new
           walker.read(file)
         end
     end

@@ -1,4 +1,4 @@
-module RemindMe
+module WhoAmI
   class ModelInfo
     def initialize(table_name)
       @table_name = table_name

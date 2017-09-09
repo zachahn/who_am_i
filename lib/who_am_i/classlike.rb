@@ -1,4 +1,4 @@
-module RemindMe
+module WhoAmI
   class Classlike
     attr_accessor :name
     attr_accessor :outerclass

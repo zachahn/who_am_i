@@ -23,7 +23,7 @@ class CommentTest < TestCase
       "#   name    string\n" \
       "#\n"
 
-    engine = RemindMe::Comment.new(table_name: "thingamajigs")
+    engine = WhoAmI::Comment.new(table_name: "thingamajigs")
     result = engine.output
 
     assert_equal(expected, result)
@@ -51,7 +51,7 @@ class CommentTest < TestCase
       "#   index_thingamajigs_on_name    (name)\n" \
       "#\n"
 
-    engine = RemindMe::Comment.new(table_name: "thingamajigs")
+    engine = WhoAmI::Comment.new(table_name: "thingamajigs")
     result = engine.output
 
     assert_equal(expected, result)
@@ -90,12 +90,12 @@ class CommentTest < TestCase
       "#   content      text\n" \
       "#\n"
 
-    engine = RemindMe::Comment.new(table_name: "authors")
+    engine = WhoAmI::Comment.new(table_name: "authors")
     result_authors = engine.output
 
     assert_equal(expected_authors, result_authors)
 
-    engine = RemindMe::Comment.new(table_name: "posts")
+    engine = WhoAmI::Comment.new(table_name: "posts")
     result_posts = engine.output
 
     assert_equal(expected_posts, result_posts)

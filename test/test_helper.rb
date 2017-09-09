@@ -1,5 +1,5 @@
 $LOAD_PATH.unshift File.expand_path("../../lib", __FILE__)
-require "remind_me"
+require "who_am_i"
 
 require "active_record"
 require_relative "support/migrate"

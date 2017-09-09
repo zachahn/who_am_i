@@ -1,4 +1,4 @@
-module RemindMe
+module WhoAmI
   module Function
     class RemoveAnnotation
       def call(file_contents:)

@@ -1,4 +1,4 @@
-module RemindMe
+module WhoAmI
   module Function
     class AnnotateFile
       def call(table_name:, file_contents:)

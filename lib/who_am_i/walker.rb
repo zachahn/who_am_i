@@ -1,4 +1,4 @@
-module RemindMe
+module WhoAmI
   class Walker < AST::Processor
     def initialize
       @current_class = Classlike.new(nil)

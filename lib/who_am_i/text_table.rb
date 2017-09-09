@@ -1,4 +1,4 @@
-module RemindMe
+module WhoAmI
   class TextTable
     include Enumerable
 

@@ -2,11 +2,11 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "remind_me/version"
+require "who_am_i/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "remind_me"
-  spec.version = RemindMe::VERSION
+  spec.name = "who_am_i"
+  spec.version = WhoAmI::VERSION
   spec.authors = ["Zach Ahn"]
   spec.email = ["engineering@zachahn.com"]
 

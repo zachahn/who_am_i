@@ -1,7 +1,7 @@
 PATH
   remote: ..
   specs:
-    remind_me (0.0.0)
+    who_am_i (0.0.0)
       activerecord (>= 3.2, < 5.2)
       parser
 
@@ -83,7 +83,7 @@ DEPENDENCIES
   minitest (~> 4.7)
   pry-byebug
   rake (~> 10.0)
-  remind_me!
+  who_am_i!
   rubocop
   sqlite3
   the_bath_of_zahn

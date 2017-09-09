@@ -7,7 +7,7 @@ class WalkerTest < TestCase
       "end\n"
 
     sexp = Parser::CurrentRuby.parse(model)
-    walker = RemindMe::Walker.new
+    walker = WhoAmI::Walker.new
     classes = walker.classes(sexp)
 
     assert_equal(["::Post"], classes.map(&:to_s))
@@ -30,7 +30,7 @@ class WalkerTest < TestCase
       "end\n"
 
     sexp = Parser::CurrentRuby.parse(model)
-    walker = RemindMe::Walker.new
+    walker = WhoAmI::Walker.new
     classes = walker.classes(sexp)
 
     assert_includes(classes.map(&:to_s), "::Extremely")
@@ -48,7 +48,7 @@ class WalkerTest < TestCase
       "end\n"
 
     sexp = Parser::CurrentRuby.parse(model)
-    walker = RemindMe::Walker.new
+    walker = WhoAmI::Walker.new
     classes = walker.classes(sexp)
 
     assert_includes(classes.map(&:to_s), "::Name::Space::Post")
@@ -67,7 +67,7 @@ class WalkerTest < TestCase
       "end\n"
 
     sexp = Parser::CurrentRuby.parse(model)
-    walker = RemindMe::Walker.new
+    walker = WhoAmI::Walker.new
     classes = walker.classes(sexp)
 
     assert_includes(classes.map(&:to_s), "::Such::A::Cool")
@@ -85,7 +85,7 @@ class WalkerTest < TestCase
       "end\n"
 
     sexp = Parser::CurrentRuby.parse(model)
-    walker = RemindMe::Walker.new
+    walker = WhoAmI::Walker.new
     classes = walker.classes(sexp)
 
     assert_equal(%i[pages], classes.map(&:table_name))
@@ -98,7 +98,7 @@ class WalkerTest < TestCase
       "end\n"
 
     sexp = Parser::CurrentRuby.parse(model)
-    walker = RemindMe::Walker.new
+    walker = WhoAmI::Walker.new
     classes = walker.classes(sexp)
 
     assert_equal([true], classes.map(&:activerecord?))
@@ -110,7 +110,7 @@ class WalkerTest < TestCase
       "end\n"
 
     sexp = Parser::CurrentRuby.parse(model)
-    walker = RemindMe::Walker.new
+    walker = WhoAmI::Walker.new
     klass = walker.classes(sexp).first
 
     assert_equal("Active::Record::Base", klass.superclass)

@@ -1,4 +1,4 @@
-module RemindMe
+module WhoAmI
   class Comment
     def initialize(table_name:)
       @model_info = ModelInfo.new(table_name)

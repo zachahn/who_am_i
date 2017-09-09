@@ -18,7 +18,7 @@ class FunctionRemoveAnnotationTest < TestCase
       "class Thingamajig < ActiveRecord::Base\n" \
       "end\n"
 
-    result = RemindMe::Function::RemoveAnnotation.new.call(file_contents: contents)
+    result = WhoAmI::Function::RemoveAnnotation.new.call(file_contents: contents)
     assert_equal(expected, result)
   end
 
@@ -35,7 +35,7 @@ class FunctionRemoveAnnotationTest < TestCase
       "class Thingamajig < ActiveRecord::Base\n" \
       "end\n"
 
-    result = RemindMe::Function::RemoveAnnotation.new.call(file_contents: contents)
+    result = WhoAmI::Function::RemoveAnnotation.new.call(file_contents: contents)
     assert_equal(expected, result)
   end
 
@@ -58,7 +58,7 @@ class FunctionRemoveAnnotationTest < TestCase
       "class Thingamajig < ActiveRecord::Base\n" \
       "end\n"
 
-    result = RemindMe::Function::RemoveAnnotation.new.call(file_contents: contents)
+    result = WhoAmI::Function::RemoveAnnotation.new.call(file_contents: contents)
     assert_equal(expected, result)
   end
 end

@@ -46,7 +46,7 @@ class DirectoryTest < TestCase
   private
 
   def new_directory
-    RemindMe::Directory.new(
+    WhoAmI::Directory.new(
       search: ["test/support/models"],
       connection: ActiveRecord::Base.connection
     )

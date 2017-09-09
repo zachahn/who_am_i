@@ -1,4 +1,4 @@
-module RemindMe
+module WhoAmI
   class ColumnInfo
     def initialize(model_class:, column:)
       @model_class = model_class
