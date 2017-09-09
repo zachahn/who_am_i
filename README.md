@@ -9,7 +9,7 @@ TODO: Delete this and the text above, and describe your gem
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'who_am_i'
+gem "who_am_i"
 ```
 
 And then execute:
@@ -32,7 +32,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/who_am_i.
+Bug reports and pull requests are welcome on GitHub at https://github.com/zachahn/who_am_i.
 
 ## License
 
