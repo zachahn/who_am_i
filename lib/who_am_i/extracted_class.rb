@@ -1,5 +1,5 @@
 module WhoAmI
-  class Classlike
+  class ExtractedClass
     attr_accessor :name
     attr_accessor :outerclass
     attr_accessor :activerecord
@@ -40,10 +40,6 @@ module WhoAmI
       else
         ""
       end
-    end
-
-    def relative_name
-      full_name[2..-1]
     end
 
     alias_method :to_s, :full_name

@@ -5,7 +5,7 @@ require "set"
 
 require "who_am_i/refinement/yield_self"
 
-require "who_am_i/classlike"
+require "who_am_i/extracted_class"
 require "who_am_i/comment"
 require "who_am_i/table_info"
 require "who_am_i/table_column_info"

@@ -1,16 +1,16 @@
 module WhoAmI
   module Function
-    class ConvertClasslikeToGatheredData
+    class ConvertExtractedClassToGatheredData
       include ProcParty
 
-      def call(classlike)
+      def call(extracted_class)
         GatheredData.new(
-          path: classlike.filename,
-          class_name: classlike.to_s,
-          table_name: classlike.table_name,
-          super_class: classlike.superclass,
-          activerecord: classlike.activerecord,
-          abstract_class: classlike.abstract_class
+          path: extracted_class.filename,
+          class_name: extracted_class.to_s,
+          table_name: extracted_class.table_name,
+          super_class: extracted_class.superclass,
+          activerecord: extracted_class.activerecord,
+          abstract_class: extracted_class.abstract_class
         )
       end
     end

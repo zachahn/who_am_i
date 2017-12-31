@@ -1,7 +1,7 @@
 module WhoAmI
   class Walker < AST::Processor
     def initialize
-      @current_class = Classlike.new(nil)
+      @current_class = ExtractedClass.new(nil)
       @classes = [@current_class]
     end
 
@@ -15,7 +15,7 @@ module WhoAmI
     end
 
     def classes(sexp)
-      @current_class = Classlike.new(nil)
+      @current_class = ExtractedClass.new(nil)
       @classes = [@current_class]
 
       process(sexp)
@@ -75,7 +75,7 @@ module WhoAmI
       class_name = resolve_class_name(class_node)
       superclass_name = resolve_class_name(superclass_node)
 
-      classlike = Classlike.new(class_name)
+      classlike = ExtractedClass.new(class_name.to_s)
       classlike.superclass = superclass_name.to_s
       classlike.outerclass = outerclass
 
