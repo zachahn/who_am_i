@@ -1,6 +1,6 @@
 namespace :who_am_i do
   desc "Annotate models"
-  task :models do
+  task :main do
     if !ActiveRecord::Base.connected?
       # Do something
     end
@@ -8,9 +8,7 @@ namespace :who_am_i do
     main = WhoAmI::Function::Main.new(File.expand_path("."))
     main.call
   end
-
-  task all: [:models]
 end
 
 desc "Annotate"
-task who_am_i: "who_am_i:all"
+task who_am_i: "who_am_i:main"
