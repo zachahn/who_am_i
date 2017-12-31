@@ -1,7 +1,7 @@
 module WhoAmI
   class Comment
     def initialize(table_name:)
-      @model_info = ModelInfo.new(table_name)
+      @model_info = TableInfo.new(table_name)
     end
 
     def output

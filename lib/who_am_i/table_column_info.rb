@@ -1,7 +1,7 @@
 module WhoAmI
-  class ColumnInfo
-    def initialize(model_class:, column:)
-      @model_class = model_class
+  class TableColumnInfo
+    def initialize(basic_model_class:, column:)
+      @basic_model_class = basic_model_class
       @column = column
     end
 
@@ -27,11 +27,11 @@ module WhoAmI
     end
 
     def primary_key?
-      case @model_class.primary_key
+      case @basic_model_class.primary_key
       when Array
-        @model_class.primary_key.include?(name)
+        @basic_model_class.primary_key.include?(name)
       when String
-        @model_class.primary_key == name
+        @basic_model_class.primary_key == name
       else
         false
       end
