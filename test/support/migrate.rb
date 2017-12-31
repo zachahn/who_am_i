@@ -1,10 +1,10 @@
 module Migrate
   def migrate!
     setup_ar!
-    support_migrate!
+    migration_schema
   end
 
-  def support_migrate!
+  def migration_schema
     ActiveRecord::Schema.define do
       create_table :post, force: true do |t|
         t.integer :category_id

@@ -6,21 +6,28 @@ module WhoAmI
     attr_writer :superclass
     attr_accessor :table_name
     attr_accessor :filename
+    attr_accessor :abstract_class
 
     def initialize(name,
       outerclass: nil,
       activerecord: false,
       superclass: nil,
-      table_name: nil)
+      table_name: nil,
+      abstract_class: nil)
       self.name = name
       self.outerclass = outerclass
       self.activerecord = activerecord
       self.superclass = superclass
       self.table_name = table_name
+      self.abstract_class = abstract_class
     end
 
     def activerecord?
       @activerecord
+    end
+
+    def abstract_class?
+      @abstract_class
     end
 
     def superclass

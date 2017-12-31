@@ -91,6 +91,19 @@ class WalkerTest < TestCase
     assert_equal(%i[pages], classes.map(&:table_name))
   end
 
+  def test_abstract_class
+    model =
+      "class Post < ActiveRecord::Base\n" \
+      "  self.abstract_class = true\n" \
+      "end\n"
+
+    sexp = Parser::CurrentRuby.parse(model)
+    walker = WhoAmI::Walker.new
+    classes = walker.classes(sexp)
+
+    assert_equal([true], classes.map(&:abstract_class?))
+  end
+
   def test_find_active_record
     model =
       "class Post < ActiveRecord::Base\n" \

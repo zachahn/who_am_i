@@ -35,11 +35,21 @@ module WhoAmI
     alias on_module on_class
 
     def on_send(node)
-      receiver, method_name, table_name_node = *node
+      receiver, method_name, assigned_node = *node
 
       if receiver == s(:self) && method_name == :table_name=
-        table_name = table_name_node.children.last
+        table_name = assigned_node.children.last
         @current_class.table_name = table_name
+      end
+
+      if receiver == s(:self) && method_name == :abstract_class=
+        abstract_class =
+          if assigned_node.type == :true
+            true
+          else
+            false
+          end
+        @current_class.abstract_class = abstract_class
       end
     end
 
@@ -66,7 +76,7 @@ module WhoAmI
       superclass_name = resolve_class_name(superclass_node)
 
       classlike = Classlike.new(class_name)
-      classlike.superclass = superclass_name
+      classlike.superclass = superclass_name.to_s
       classlike.outerclass = outerclass
 
       if classlike.superclass == "ActiveRecord::Base"

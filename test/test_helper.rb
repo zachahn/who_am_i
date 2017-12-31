@@ -1,7 +1,10 @@
 $LOAD_PATH.unshift File.expand_path("../../lib", __FILE__)
 require "who_am_i"
 
+require "fileutils"
+require "rake"
 require "active_record"
+require "active_support/all"
 require_relative "support/migrate"
 
 require "minitest/autorun"
