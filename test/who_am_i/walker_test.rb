@@ -132,4 +132,25 @@ class WalkerTest < TestCase
 
     assert_equal("Active::Record::Base", klass.superclass)
   end
+
+  def test_finds_multiple_sequential_classes
+    model =
+      "class SomeError < StandardError\n" \
+      "end\n" \
+      "\n" \
+      "class Post < ActiveRecord::Base\n" \
+      "end\n"
+
+    sexp = Parser::CurrentRuby.parse(model)
+    walker = WhoAmI::Walker.new
+    classes = walker.classes(sexp)
+
+    assert_equal(
+      [
+        "::Post",
+        "::SomeError",
+      ],
+      classes.map(&:to_s).sort
+    )
+  end
 end
