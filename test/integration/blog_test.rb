@@ -21,22 +21,22 @@ class BlogIntegrationTest < TestCase
     end
   end
 
-  def application_record_class
-    @application_record_class ||=
+  def original_application_record_content
+    @original_application_record_content ||=
       "class ApplicationRecord < ActiveRecord::Base\n" \
       "  self.abstract_class = true\n" \
       "end\n"
   end
 
-  def post_class
-    @post_class ||=
+  def original_post_content
+    @original_post_content ||=
       "class Post < ApplicationRecord\n" \
       "  has_many :comments\n" \
       "end\n"
   end
 
-  def comment_class
-    @comment_class ||=
+  def original_comment_content
+    @original_comment_content ||=
       "class Comment < ActiveRecord::Base\n" \
       "  belongs_to :post\n" \
       "end\n"
@@ -51,15 +51,15 @@ class BlogIntegrationTest < TestCase
       "      - app/models\n"
   end
 
-  def test_
+  def test_from_scratch
     migrate!
 
     in_tmpdir do |tmpdir|
       FileUtils.mkdir_p("app/models")
       FileUtils.mkdir_p("config/initializers")
-      File.write("app/models/application_record.rb", application_record_class)
-      File.write("app/models/post.rb", post_class)
-      File.write("app/models/comment.rb", comment_class)
+      File.write("app/models/application_record.rb", original_application_record_content)
+      File.write("app/models/post.rb", original_post_content)
+      File.write("app/models/comment.rb", original_comment_content)
       File.write("config/initializers/who_am_i.yml", config_yml)
 
       rake_run do |rake|
@@ -67,7 +67,45 @@ class BlogIntegrationTest < TestCase
         Rake::Task[:who_am_i].invoke
       end
 
-      assert_match(/\A#/, File.read("app/models/post.rb"))
+      assert_equal(
+        original_application_record_content,
+        File.read("app/models/application_record.rb")
+      )
+      assert_equal(
+        "# == Schema Info\n" \
+        "#\n" \
+        "# Table name: posts\n" \
+        "#\n" \
+        "#   id            integer     not null, primary key\n" \
+        "#   content       text\n" \
+        "#   created_at    datetime    not null\n" \
+        "#   updated_at    datetime    not null\n" \
+        "#\n" \
+        "\n" \
+        "class Post < ApplicationRecord\n" \
+        "  has_many :comments\n" \
+        "end\n",
+        File.read("app/models/post.rb")
+      )
+
+      assert_equal(
+        "# == Schema Info\n" \
+        "#\n" \
+        "# Table name: comments\n" \
+        "#\n" \
+        "#   id            integer     not null, primary key\n" \
+        "#   post_id       integer\n" \
+        "#   name          string      not null\n" \
+        "#   content       text\n" \
+        "#   created_at    datetime    not null\n" \
+        "#   updated_at    datetime    not null\n" \
+        "#\n" \
+        "\n" \
+        "class Comment < ActiveRecord::Base\n" \
+        "  belongs_to :post\n" \
+        "end\n",
+        File.read("app/models/comment.rb")
+      )
     end
   end
 end
