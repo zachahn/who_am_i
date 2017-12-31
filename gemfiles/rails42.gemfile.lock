@@ -4,6 +4,7 @@ PATH
     who_am_i (0.0.0)
       activerecord (>= 3.2, < 5.2)
       parser
+      proc_party
 
 GEM
   remote: https://rubygems.org/
@@ -41,6 +42,7 @@ GEM
     parser (2.4.0.0)
       ast (~> 2.2)
     powerpack (0.1.1)
+    proc_party (0.2.0)
     pry (0.10.4)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -80,10 +82,10 @@ DEPENDENCIES
   minitest (~> 5.10)
   pry-byebug
   rake (~> 10.0)
-  who_am_i!
   rubocop
   sqlite3
   the_bath_of_zahn
+  who_am_i!
 
 BUNDLED WITH
-   1.15.3
+   1.15.4
