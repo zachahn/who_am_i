@@ -57,13 +57,13 @@ module WhoAmI
       process_children(node)
     end
 
-    # ignore instance method definitions
-    # classes cannot be defined from within a method
+    # ignore instance method definitions since method definition bodies can't
+    # contain class declarations
     def on_def(_)
     end
 
-    # ignore class method definitions
-    # classes cannot be defined from within a method
+    # ignore class method definitions since method definition bodies can't
+    # contain class declarations
     def on_defs(_)
     end
 
