@@ -33,13 +33,17 @@ class WalkerTest < TestCase
     walker = WhoAmI::Walker.new
     classes = walker.classes(sexp)
 
-    assert_includes(classes.map(&:to_s), "::Extremely")
-    assert_includes(classes.map(&:to_s), "::Extremely::Very")
-    assert_includes(classes.map(&:to_s), "::Extremely::Very::Cool")
-    assert_includes(classes.map(&:to_s), "::Extremely::Very::Cool::Post")
-    assert_includes(classes.map(&:to_s), "::Extremely::Very::Boring")
-    assert_includes(classes.map(&:to_s), "::Extremely::Very::Boring::Post")
-    assert_equal(6, classes.size)
+    assert_equal(
+      [
+        "::Extremely",
+        "::Extremely::Very",
+        "::Extremely::Very::Boring",
+        "::Extremely::Very::Boring::Post",
+        "::Extremely::Very::Cool",
+        "::Extremely::Very::Cool::Post",
+      ],
+      classes.map(&:to_s).sort
+    )
   end
 
   def test_finds_nested_compact_classes
