@@ -5,9 +5,9 @@ module WhoAmI
 
       def call(path)
         walker = WhoAmI::Walker.new
-        classes_info = walker.read(path)
+        extracted_classes = walker.read(path)
 
-        classes_info
+        extracted_classes
       end
     end
   end

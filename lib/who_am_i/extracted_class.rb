@@ -7,6 +7,7 @@ module WhoAmI
     attr_accessor :table_name
     attr_accessor :filename
     attr_accessor :abstract_class
+    attr_accessor :resolved_superclass
 
     def initialize(name,
       outerclass: nil,

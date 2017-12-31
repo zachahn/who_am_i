@@ -13,6 +13,7 @@ module WhoAmI
         paths
           .flat_map(&Ls.new)
           .flat_map(&ParseModel.new)
+          .yield_self(&ResolveClassRelationships.new)
           .yield_self(&ResolveActiveRecord.new)
           .map(&ConvertExtractedClassToGatheredData.new)
           .yield_self(&ResolveTables.new)

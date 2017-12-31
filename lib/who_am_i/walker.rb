@@ -72,6 +72,10 @@ module WhoAmI
     def classlike_create(node, outerclass:)
       class_node, superclass_node, _body_node = *node
 
+      if node.type == :module
+        superclass_node = nil
+      end
+
       class_name = resolve_class_name(class_node)
       superclass_name = resolve_class_name(superclass_node)
 

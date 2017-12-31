@@ -133,6 +133,21 @@ class WalkerTest < TestCase
     assert_equal("Active::Record::Base", klass.superclass)
   end
 
+  def test_superclass_of_namespace
+    model =
+      "module Post\n" \
+      "  class Text; end\n" \
+      "end\n"
+
+    sexp = Parser::CurrentRuby.parse(model)
+    walker = WhoAmI::Walker.new
+    extracted_classes = walker.classes(sexp).map { |x| [x.full_name, x] }.to_h
+
+    subject = extracted_classes["::Post"]
+
+    assert_equal("", subject.superclass)
+  end
+
   def test_finds_multiple_sequential_classes
     model =
       "class SomeError < StandardError\n" \

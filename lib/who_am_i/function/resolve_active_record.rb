@@ -13,7 +13,8 @@ module WhoAmI
 
       include ProcParty
 
-      def call(classes_info)
+      def call(object_space)
+        classes_info = object_space.values
         name_to_class_info = {}
         dependency_graph = Graph.new
 
