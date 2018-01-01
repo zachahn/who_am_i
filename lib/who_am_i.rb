@@ -1,6 +1,5 @@
 require "parser/current"
 require "proc_party"
-require "tsort"
 require "set"
 
 require "who_am_i/refinement/yield_self"
@@ -14,7 +13,6 @@ require "who_am_i/walker"
 require "who_am_i/text_table"
 require "who_am_i/error"
 require "who_am_i/gathered_data"
-require "who_am_i/trees"
 
 require "who_am_i/function/remove_annotation"
 require "who_am_i/function/main"

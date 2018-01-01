@@ -1,64 +1,39 @@
 module WhoAmI
   module Function
     class ResolveActiveRecord
-      class Graph < Hash
-        include TSort
-
-        alias tsort_each_node each_key
-
-        def tsort_each_child(node, &block)
-          fetch(node).each(&block)
-        end
-      end
-
       include ProcParty
 
       def call(object_space)
-        classes_info = object_space.values
-        name_to_class_info = {}
-        dependency_graph = Graph.new
+        tree = {}
+        object_space.each do |_full_name, extracted_class|
+          superclass = extracted_class.resolved_superclass
 
-        classes_info.each do |class_info|
-          name = class_info.to_s
-          dependency_graph[name] ||= Set.new
-
-          if name_to_class_info[name].nil?
-            name_to_class_info[name] = class_info
-          end
-
-          if class_info.superclass
-            superclass_name = "::#{class_info.superclass}"
-
-            if name_to_class_info[superclass_name].nil?
-              name_to_class_info[superclass_name] = nil
-            end
-
-            dependency_graph[name] << superclass_name
-            dependency_graph[superclass_name] ||= Set.new
-          end
+          tree[superclass] ||= Set.new
+          tree[superclass].add(extracted_class)
         end
 
-        trees = Trees.new
+        activerecord_family =
+          gather_family(object_space["::ActiveRecord::Base"], tree)
 
-        # pp name_to_class_info
-        dependency_graph.tsort.each do |class_name|
-          class_info = name_to_class_info[class_name]
-          superclass_name =
-            if class_info && class_info.superclass
-              "::#{class_info.superclass}"
-            else
-              nil
-            end
-
-          trees.insert(class_name, superclass_name)
+        activerecord_family.each do |individual|
+          individual.activerecord = true
         end
 
-        trees.children_of("::ActiveRecord::Base").map do |class_name|
-          class_info = name_to_class_info[class_name]
-          class_info.activerecord = true
+        object_space.values - [object_space[""], object_space["::ActiveRecord::Base"]]
+      end
 
-          class_info
+      private
+
+      def gather_family(node, tree)
+        gather_family_helper(node, tree).flatten
+      end
+
+      def gather_family_helper(node, tree)
+        if tree[node].nil?
+          return node
         end
+
+        [node] + tree[node].map { |child| gather_family_helper(child, tree) }
       end
     end
   end

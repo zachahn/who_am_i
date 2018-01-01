@@ -83,10 +83,6 @@ module WhoAmI
       classlike.superclass = superclass_name.to_s
       classlike.outerclass = outerclass
 
-      if classlike.superclass == "ActiveRecord::Base"
-        classlike.activerecord = true
-      end
-
       classlike
     end
 
