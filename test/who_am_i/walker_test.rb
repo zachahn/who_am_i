@@ -128,7 +128,7 @@ class WalkerTest < TestCase
 
     sexp = Parser::CurrentRuby.parse(model)
     walker = WhoAmI::Walker.new
-    extracted_classes = walker.classes(sexp).map { |x| [x.full_name, x] }.to_h
+    extracted_classes = walker.classes(sexp).map { |x| [x.class_name, x] }.to_h
 
     subject = extracted_classes["::Post"]
 

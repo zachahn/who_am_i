@@ -5,7 +5,7 @@ module WhoAmI
 
       def call(object_space)
         tree = {}
-        object_space.each do |_full_name, extracted_class|
+        object_space.each do |_class_name, extracted_class|
           superclass = extracted_class.resolved_superclass
 
           tree[superclass] ||= Set.new

@@ -3,10 +3,10 @@ module WhoAmI
     class ComputeComment
       include ProcParty
 
-      def call(gathered_data)
+      def call(extracted_class)
         commenter =
-          WhoAmI::Comment.new(table_name: gathered_data.table_name)
-        gathered_data.computed_header = commenter.output
+          WhoAmI::Comment.new(table_name: extracted_class.table_name)
+        extracted_class.computed_header = commenter.output
       end
     end
   end

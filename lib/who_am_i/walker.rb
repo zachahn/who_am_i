@@ -20,7 +20,7 @@ module WhoAmI
 
       process(sexp)
 
-      @classes.reject { |klass| klass.full_name == "" }
+      @classes.reject { |klass| klass.class_name == "" }
     end
 
     def on_class(node)

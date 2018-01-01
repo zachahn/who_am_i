@@ -10,7 +10,7 @@ module WhoAmI
             .flatten
             .compact
             .uniq
-            .map { |x| [x.full_name, x] }
+            .map { |x| [x.class_name, x] }
             .to_h
 
         object_space[""] ||= ExtractedClass.new(nil)
@@ -21,8 +21,8 @@ module WhoAmI
             outerclass: object_space[""]
           )
 
-        object_space.each do |full_name, extracted_class|
-          possible_namespace_levels = full_name.split("::")[1..-2] || []
+        object_space.each do |class_name, extracted_class|
+          possible_namespace_levels = class_name.split("::")[1..-2] || []
 
           if extracted_class.claimed_superclass == "" || extracted_class.claimed_superclass == nil
             next

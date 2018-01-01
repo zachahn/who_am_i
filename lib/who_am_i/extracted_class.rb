@@ -8,6 +8,8 @@ module WhoAmI
     attr_accessor :model_filepath
     attr_accessor :abstract_class
     attr_accessor :resolved_superclass
+    attr_accessor :computed_header
+    attr_accessor :computed_content
 
     def initialize(name,
       outerclass: nil,
@@ -35,14 +37,14 @@ module WhoAmI
       @claimed_superclass.to_s
     end
 
-    def full_name
+    def class_name
       if @name
-        "#{outerclass.full_name}::#{@name}"
+        "#{outerclass.class_name}::#{@name}"
       else
         ""
       end
     end
 
-    alias_method :to_s, :full_name
+    alias_method :to_s, :class_name
   end
 end

@@ -3,13 +3,13 @@ module WhoAmI
     class WriteModel
       include ProcParty
 
-      def call(gathered_data)
+      def call(extracted_class)
         content =
-          "#{gathered_data.computed_header}" \
+          "#{extracted_class.computed_header}" \
           "\n" \
-          "#{gathered_data.computed_content}" 
+          "#{extracted_class.computed_content}" 
 
-        File.write(gathered_data.path, content)
+        File.write(extracted_class.model_filepath, content)
       end
     end
   end

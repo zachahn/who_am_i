@@ -14,7 +14,6 @@ module WhoAmI
           .flat_map(&Ls.new)
           .flat_map(&ParseModel.new)
           .tap(&ExtractModelData.new)
-          .map(&ConvertExtractedClassToGatheredData.new)
           .yield_self(&ResolveTables.new)
           .reject(&:abstract_class?)
           .each(&ComputeComment.new)
