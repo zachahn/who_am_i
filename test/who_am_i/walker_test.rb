@@ -117,7 +117,7 @@ class WalkerTest < TestCase
     walker = WhoAmI::Walker.new
     klass = walker.classes(sexp).first
 
-    assert_equal("Active::Record::Base", klass.superclass)
+    assert_equal("Active::Record::Base", klass.claimed_superclass)
   end
 
   def test_superclass_of_namespace
@@ -132,7 +132,7 @@ class WalkerTest < TestCase
 
     subject = extracted_classes["::Post"]
 
-    assert_equal("", subject.superclass)
+    assert_equal("", subject.claimed_superclass)
   end
 
   def test_finds_multiple_sequential_classes

@@ -10,7 +10,7 @@ module WhoAmI
       sexp = Parser::CurrentRuby.parse(content)
 
       classes(sexp).each do |klass|
-        klass.filename = file
+        klass.model_filepath = file
       end
     end
 
@@ -20,7 +20,7 @@ module WhoAmI
 
       process(sexp)
 
-      @classes.reject { |klass| klass.name.nil? }
+      @classes.reject { |klass| klass.full_name == "" }
     end
 
     def on_class(node)
@@ -80,7 +80,7 @@ module WhoAmI
       superclass_name = resolve_class_name(superclass_node)
 
       classlike = ExtractedClass.new(class_name.to_s)
-      classlike.superclass = superclass_name.to_s
+      classlike.claimed_superclass = superclass_name.to_s
       classlike.outerclass = outerclass
 
       classlike

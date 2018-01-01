@@ -24,13 +24,13 @@ module WhoAmI
         object_space.each do |full_name, extracted_class|
           possible_namespace_levels = full_name.split("::")[1..-2] || []
 
-          if extracted_class.superclass == "" || extracted_class.superclass == nil
+          if extracted_class.claimed_superclass == "" || extracted_class.claimed_superclass == nil
             next
           end
 
           (possible_namespace_levels.size + 1).times do
             class_uri_parts =
-              possible_namespace_levels + [extracted_class.superclass]
+              possible_namespace_levels + [extracted_class.claimed_superclass]
 
             class_uri = "::#{class_uri_parts.join("::")}"
 

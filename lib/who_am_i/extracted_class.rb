@@ -1,43 +1,43 @@
 module WhoAmI
   class ExtractedClass
-    attr_accessor :name
+    attr_writer :name
     attr_accessor :outerclass
     attr_accessor :activerecord
-    attr_writer :superclass
+    attr_writer :claimed_superclass
     attr_accessor :table_name
-    attr_accessor :filename
+    attr_accessor :model_filepath
     attr_accessor :abstract_class
     attr_accessor :resolved_superclass
 
     def initialize(name,
       outerclass: nil,
       activerecord: false,
-      superclass: nil,
+      claimed_superclass: nil,
       table_name: nil,
       abstract_class: nil)
       self.name = name
       self.outerclass = outerclass
       self.activerecord = activerecord
-      self.superclass = superclass
+      self.claimed_superclass = claimed_superclass
       self.table_name = table_name
       self.abstract_class = abstract_class
     end
 
     def activerecord?
-      @activerecord
+      !!@activerecord
     end
 
     def abstract_class?
-      @abstract_class
+      !!@abstract_class
     end
 
-    def superclass
-      @superclass.to_s
+    def claimed_superclass
+      @claimed_superclass.to_s
     end
 
     def full_name
-      if name
-        "#{outerclass.full_name}::#{name}"
+      if @name
+        "#{outerclass.full_name}::#{@name}"
       else
         ""
       end
