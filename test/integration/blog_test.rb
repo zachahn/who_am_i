@@ -48,7 +48,7 @@ class BlogIntegrationTest < TestCase
       "enabled:\n" \
       "  models:\n" \
       "    paths:\n" \
-      "      - app/models\n"
+      "      - app/models/**/*.rb\n"
   end
 
   def test_from_scratch

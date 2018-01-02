@@ -4,7 +4,7 @@ module WhoAmI
       include ProcParty
 
       def call(path)
-        glob = File.expand_path(File.join(path, "**", "*.rb"))
+        glob = File.expand_path(path)
 
         Dir[glob].select { |path| File.file?(path) }
       end
