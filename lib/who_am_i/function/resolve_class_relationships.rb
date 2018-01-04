@@ -18,7 +18,8 @@ module WhoAmI
         object_space["::ActiveRecord::Base"] =
           ExtractedClass.new(
             "ActiveRecord::Base",
-            outerclass: object_space[""]
+            outerclass: object_space[""],
+            abstract_class: true
           )
 
         object_space.each do |class_name, extracted_class|

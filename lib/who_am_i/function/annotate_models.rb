@@ -1,7 +1,6 @@
 module WhoAmI
   module Function
     class AnnotateModels
-      using Refinement::YieldSelf
       include ProcParty
 
       def initialize(config, tables)
@@ -16,7 +15,7 @@ module WhoAmI
           .tap(&ExtractModelData.new)
           .select(&:activerecord?)
           .reject(&:abstract_class?)
-          .yield_self(&ResolveTables.new)
+          .each(&ResolveTable.new(@tables))
           .reject(&:skipped?)
           .each(&ComputeComment.new)
           .reject(&:skipped?)
