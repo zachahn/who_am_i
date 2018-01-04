@@ -23,6 +23,7 @@ module WhoAmI
       self.claimed_superclass = claimed_superclass
       self.table_name = table_name
       self.abstract_class = abstract_class
+      @skipped_because = []
     end
 
     def activerecord?
@@ -43,6 +44,14 @@ module WhoAmI
       else
         ""
       end
+    end
+
+    def skipped?
+      @skipped_because.size > 0
+    end
+
+    def skip(reason)
+      @skipped_because.push(reason)
     end
 
     alias_method :to_s, :class_name

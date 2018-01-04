@@ -17,8 +17,11 @@ module WhoAmI
           .select(&:activerecord?)
           .reject(&:abstract_class?)
           .yield_self(&ResolveTables.new)
+          .reject(&:skipped?)
           .each(&ComputeComment.new)
+          .reject(&:skipped?)
           .each(&ComputeContent.new)
+          .reject(&:skipped?)
           .each(&WriteModel.new)
       end
 
