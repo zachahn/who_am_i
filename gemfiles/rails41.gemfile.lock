@@ -1,7 +1,7 @@
 PATH
   remote: ..
   specs:
-    who_am_i (0.0.1)
+    who_am_i (0.0.2)
       activerecord (>= 3.2, < 5.2)
       parser
       proc_party
