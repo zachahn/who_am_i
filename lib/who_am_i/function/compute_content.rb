@@ -3,12 +3,10 @@ module WhoAmI
     class ComputeContent
       include ProcParty
 
-      PATTERN = %r{\A(?:(?:^#.*?$)\n)*\n*(.*)}m
-
       def call(extracted_class)
         original_content = File.read(extracted_class.model_filepath)
-        content = PATTERN.match(original_content)
-        extracted_class.computed_content = content
+        bare_content = RemoveAnnotation.new.call(original_content)
+        extracted_class.computed_content = bare_content
       end
     end
   end

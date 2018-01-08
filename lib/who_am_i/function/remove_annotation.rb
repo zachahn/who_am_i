@@ -1,7 +1,7 @@
 module WhoAmI
   module Function
     class RemoveAnnotation
-      def call(file_contents:)
+      def call(file_contents)
         if file_contents !~ /\A# == Schema Info/
           return file_contents
         end
