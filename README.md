@@ -1,5 +1,7 @@
 # WhoAmI
 
+[![Build Status](https://travis-ci.org/zachahn/who_am_i.svg?branch=master)](https://travis-ci.org/zachahn/who_am_i)
+
 > Who am I? &mdash; <cite>Hansel</cite>
 
 > Who am I? &mdash; <cite>Katy Perry</cite>
