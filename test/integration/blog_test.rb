@@ -60,11 +60,11 @@ class BlogIntegrationTest < TestCase
 
     in_tmpdir do |tmpdir|
       FileUtils.mkdir_p("app/models")
-      FileUtils.mkdir_p("config/initializers")
+      FileUtils.mkdir_p("config")
       File.write("app/models/application_record.rb", original_application_record_content)
       File.write("app/models/post.rb", original_post_content)
       File.write("app/models/comment.rb", original_comment_content)
-      File.write("config/initializers/who_am_i.yml", config_yml)
+      File.write("config/who_am_i.yml", config_yml)
 
       rake_run do |rake|
         WhoAmI.load_rake_tasks

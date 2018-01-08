@@ -25,7 +25,7 @@ module WhoAmI
       end
 
       def initializer_path
-        File.join(@root, "config", "initializers", "who_am_i.yml")
+        File.join(@root, "config", "who_am_i.yml")
       end
 
       def deep_symbolize_hash(obj)
