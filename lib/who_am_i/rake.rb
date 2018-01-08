@@ -1,12 +1,6 @@
-namespace :who_am_i do
-  desc "Annotate models"
-  task :main do
+module WhoAmI
+  def self.load_rake_tasks
     require "who_am_i"
-
-    main = WhoAmI::Function::Main.new(File.expand_path("."))
-    main.call
+    load(File.expand_path("tasks.rake", __dir__))
   end
 end
-
-desc "Annotate"
-task who_am_i: "who_am_i:main"

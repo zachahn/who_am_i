@@ -1,5 +1,6 @@
 $LOAD_PATH.unshift File.expand_path("../../lib", __FILE__)
 require "who_am_i"
+require "who_am_i/rake"
 
 require "fileutils"
 require "rake"

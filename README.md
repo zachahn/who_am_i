@@ -29,7 +29,15 @@ And then execute:
 
     $ bundle
 
-In your `Rakefile`, require `who_am_i/rake`.
+In your `Rakefile`:
+
+```ruby
+require "who_am_i/rake"
+
+# ...
+# after `Rails.application.load_tasks`
+WhoAmI.load_rake_tasks
+```
 
 
 ## Usage
