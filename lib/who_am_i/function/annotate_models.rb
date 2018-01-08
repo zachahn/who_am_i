@@ -27,11 +27,7 @@ module WhoAmI
       private
 
       def paths
-        if @config.nil?
-          []
-        else
-          @config[:paths]
-        end
+        @config.annotate_models_paths
       end
     end
   end

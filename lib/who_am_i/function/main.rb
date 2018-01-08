@@ -7,10 +7,10 @@ module WhoAmI
 
       def call
         config = LoadConfig.new(@root).call
+        SetupEnvironment.new(config, @root).call
         tables = GetTables.new.call
-        LoadInflections.new.call
 
-        AnnotateModels.new(config[:enabled][:models], tables).call
+        AnnotateModels.new(config, tables).call
       end
     end
   end

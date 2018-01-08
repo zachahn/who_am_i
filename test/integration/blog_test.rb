@@ -45,6 +45,10 @@ class BlogIntegrationTest < TestCase
   def config_yml
     @config_yml ||=
       "---\n" \
+      "autorun:\n" \
+      "  enabled: false\n" \
+      "environment:\n" \
+      "  approach: manual\n" \
       "enabled:\n" \
       "  models:\n" \
       "    paths:\n" \

@@ -8,25 +8,20 @@ module WhoAmI
       end
 
       def call
-        hash = YAML.load_file(config_path)
-        deep_symbolize_hash(hash)
+        Config.new(loaded_configuration)
       end
 
       private
 
-      def config_path
-        @config_path ||=
-          if File.exist?(dotfile_path)
-            dotfile_path
-          elsif File.exist?(initializer_path)
-            initializer_path
+      def loaded_configuration
+        @loaded_configuration ||=
+          if File.exist?(initializer_path)
+            contents = YAML.load_file(initializer_path)
+            deep_symbolize_hash(contents)
           else
-            raise WhoAmI::Error, "Configuration not found"
+            warn "WhoAmI configuration not found, using default"
+            {}
           end
-      end
-
-      def dotfile_path
-        File.join(@root, ".who_am_i.yml")
       end
 
       def initializer_path
