@@ -23,7 +23,7 @@ Add this line to your application's Gemfile:
 
 ```ruby
 group :development do
-  gem "who_am_i", require: false
+  gem "who_am_i"
 end
 ```
 
@@ -31,20 +31,12 @@ And then execute:
 
     $ bundle
 
-In your `Rakefile`:
-
-```ruby
-require "who_am_i/rake"
-
-# ...
-# after `Rails.application.load_tasks`
-WhoAmI.load_rake_tasks
-```
-
 
 ## Usage
 
 Run `rake who_am_i` to update your model files.
+
+By default, `who_am_i` also runs after migrating your database.
 
 
 ## Development

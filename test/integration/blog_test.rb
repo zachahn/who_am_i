@@ -96,7 +96,7 @@ class BlogIntegrationTest < TestCase
       File.write("config/who_am_i.yml", config_yml)
 
       rake_run do |rake|
-        WhoAmI.load_rake_tasks
+        load "who_am_i/tasks.rake"
         Rake::Task[:who_am_i].invoke
       end
 

@@ -32,3 +32,7 @@ require "who_am_i/function/resolve_table"
 require "who_am_i/function/compute_comment"
 require "who_am_i/function/compute_content"
 require "who_am_i/function/write_model"
+
+if defined?(Rails)
+  require "who_am_i/railtie"
+end
