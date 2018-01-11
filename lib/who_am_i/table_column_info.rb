@@ -1,8 +1,8 @@
 module WhoAmI
   class TableColumnInfo
-    def initialize(basic_model_class:, column:)
-      @basic_model_class = basic_model_class
+    def initialize(table_name:, column:)
       @column = column
+      @primary_key = ActiveRecord::Base.get_primary_key(@table_name)
     end
 
     def name
@@ -27,11 +27,11 @@ module WhoAmI
     end
 
     def primary_key?
-      case @basic_model_class.primary_key
+      case @primary_key
       when Array
-        @basic_model_class.primary_key.include?(name)
+        @primary_key.include?(name)
       when String
-        @basic_model_class.primary_key == name
+        @primary_key == name
       else
         false
       end

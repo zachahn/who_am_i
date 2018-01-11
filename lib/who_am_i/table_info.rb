@@ -8,24 +8,18 @@ module WhoAmI
 
     def columns
       @columns ||=
-        basic_model_class.columns.map do |column|
-          TableColumnInfo.new(basic_model_class: basic_model_class, column: column)
+        begin
+          columns_hash =
+            ActiveRecord::Base.connection.schema_cache.columns_hash(@table_name)
+
+          columns_hash.values.map do |column|
+            TableColumnInfo.new(table_name: @table_name, column: column)
+          end
         end
     end
 
     def indices
-      @indices ||=
-        basic_model_class.connection.indexes(@table_name)
-    end
-
-    private
-
-    def basic_model_class
-      @basic_model_class ||=
-        begin
-          table = @table_name
-          Class.new(ActiveRecord::Base) { self.table_name = table }
-        end
+      @indices ||= ActiveRecord::Base.connection.indexes(@table_name)
     end
   end
 end
