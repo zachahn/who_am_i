@@ -1,14 +1,14 @@
 require "test_helper"
 
-class WalkerTest < TestCase
+class FindClassesTest < TestCase
   def test_finds_classes
     model =
       "class Post < ActiveRecord::Base\n" \
       "end\n"
 
     sexp = Parser::CurrentRuby.parse(model)
-    walker = WhoAmI::Walker.new
-    classes = walker.classes(sexp)
+    walker = WhoAmI::FindClasses.new
+    classes = walker.call(sexp)
 
     assert_equal(["::Post"], classes.map(&:to_s))
   end
@@ -30,8 +30,8 @@ class WalkerTest < TestCase
       "end\n"
 
     sexp = Parser::CurrentRuby.parse(model)
-    walker = WhoAmI::Walker.new
-    classes = walker.classes(sexp)
+    walker = WhoAmI::FindClasses.new
+    classes = walker.call(sexp)
 
     assert_equal(
       [
@@ -52,8 +52,8 @@ class WalkerTest < TestCase
       "end\n"
 
     sexp = Parser::CurrentRuby.parse(model)
-    walker = WhoAmI::Walker.new
-    classes = walker.classes(sexp)
+    walker = WhoAmI::FindClasses.new
+    classes = walker.call(sexp)
 
     assert_includes(classes.map(&:to_s), "::Name::Space::Post")
     assert_equal(1, classes.size)
@@ -71,8 +71,8 @@ class WalkerTest < TestCase
       "end\n"
 
     sexp = Parser::CurrentRuby.parse(model)
-    walker = WhoAmI::Walker.new
-    classes = walker.classes(sexp)
+    walker = WhoAmI::FindClasses.new
+    classes = walker.call(sexp)
 
     assert_includes(classes.map(&:to_s), "::Such::A::Cool")
     assert_includes(classes.map(&:to_s), "::Such::A::Cool::Namespace")
@@ -89,8 +89,8 @@ class WalkerTest < TestCase
       "end\n"
 
     sexp = Parser::CurrentRuby.parse(model)
-    walker = WhoAmI::Walker.new
-    classes = walker.classes(sexp)
+    walker = WhoAmI::FindClasses.new
+    classes = walker.call(sexp)
 
     assert_equal(%i[pages], classes.map(&:table_name))
   end
@@ -102,8 +102,8 @@ class WalkerTest < TestCase
       "end\n"
 
     sexp = Parser::CurrentRuby.parse(model)
-    walker = WhoAmI::Walker.new
-    classes = walker.classes(sexp)
+    walker = WhoAmI::FindClasses.new
+    classes = walker.call(sexp)
 
     assert_equal([true], classes.map(&:abstract_class?))
   end
@@ -114,8 +114,8 @@ class WalkerTest < TestCase
       "end\n"
 
     sexp = Parser::CurrentRuby.parse(model)
-    walker = WhoAmI::Walker.new
-    klass = walker.classes(sexp).first
+    walker = WhoAmI::FindClasses.new
+    klass = walker.call(sexp).first
 
     assert_equal("Active::Record::Base", klass.claimed_superclass)
   end
@@ -127,8 +127,8 @@ class WalkerTest < TestCase
       "end\n"
 
     sexp = Parser::CurrentRuby.parse(model)
-    walker = WhoAmI::Walker.new
-    extracted_classes = walker.classes(sexp).map { |x| [x.class_name, x] }.to_h
+    walker = WhoAmI::FindClasses.new
+    extracted_classes = walker.call(sexp).map { |x| [x.class_name, x] }.to_h
 
     subject = extracted_classes["::Post"]
 
@@ -144,8 +144,8 @@ class WalkerTest < TestCase
       "end\n"
 
     sexp = Parser::CurrentRuby.parse(model)
-    walker = WhoAmI::Walker.new
-    classes = walker.classes(sexp)
+    walker = WhoAmI::FindClasses.new
+    classes = walker.call(sexp)
 
     assert_equal(
       [

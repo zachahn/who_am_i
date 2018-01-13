@@ -1,20 +1,13 @@
 module WhoAmI
-  class Walker < AST::Processor
-    def initialize
-      @current_class = ExtractedClass.new(nil)
-      @classes = [@current_class]
-    end
-
-    def read(file)
-      content = File.read(file)
+  class FindClasses < Parser::AST::Processor
+    def read_and_call(path)
+      content = File.read(path)
       sexp = Parser::CurrentRuby.parse(content)
 
-      classes(sexp).each do |klass|
-        klass.model_filepath = file
-      end
+      call(sexp)
     end
 
-    def classes(sexp)
+    def call(sexp)
       @current_class = ExtractedClass.new(nil)
       @classes = [@current_class]
 

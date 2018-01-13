@@ -4,10 +4,10 @@ module WhoAmI
       include ProcParty
 
       def call(path)
-        walker = WhoAmI::Walker.new
-        extracted_classes = walker.read(path)
+        walker = WhoAmI::FindClasses.new
+        extracted_classes = walker.read_and_call(path)
 
-        extracted_classes
+        extracted_classes.each { |klass| klass.model_filepath = path }
       end
     end
   end

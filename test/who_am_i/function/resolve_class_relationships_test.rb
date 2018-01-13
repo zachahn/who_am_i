@@ -19,8 +19,8 @@ class FunctionResolveClassRelationshipsTest < TestCase
       "class Post::Video < Abstract; end\n"
 
     sexp = Parser::CurrentRuby.parse(input)
-    walker = WhoAmI::Walker.new
-    classes = walker.classes(sexp)
+    walker = WhoAmI::FindClasses.new
+    classes = walker.call(sexp)
 
     resolver = WhoAmI::Function::ResolveClassRelationships.new
     object_space = resolver.call(classes)
