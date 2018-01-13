@@ -1,6 +1,6 @@
 require "test_helper"
 
-class BlogIntegrationTest < TestCase
+class ModelIntegrationTest < TestCase
   include Migrate
 
   def migration_schema
