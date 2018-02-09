@@ -19,7 +19,6 @@ module WhoAmI
             contents = YAML.load_file(initializer_path)
             deep_symbolize_hash(contents)
           else
-            warn "WhoAmI configuration not found, using default"
             {}
           end
       end
