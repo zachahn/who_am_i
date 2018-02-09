@@ -4,7 +4,11 @@ module WhoAmI
       include ProcParty
 
       def call
-        ActiveRecord::Base.connection.tables
+        if ActiveRecord::Base.connection.respond_to?(:data_sources)
+          ActiveRecord::Base.connection.data_sources
+        else
+          ActiveRecord::Base.connection.tables
+        end
       end
     end
   end
