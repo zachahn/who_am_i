@@ -11,10 +11,26 @@
 > Who am I? &mdash; <cite>Zoolander</cite>
 
 WhoAmI comments at the top of your model file with a list of the table's
-columns.
+columns. This project is heavily inspired by the
+[annotate](https://github.com/ctran/annotate_models) gem.
 
-Please remember to use version control before using WhoAmI. I've definitely
-written a few bugs in my lifetime.
+Please take the precaution of using version control when using WhoAmI, since the
+primary function of this project is to overwrite your development files.
+
+
+## Pros and cons
+
+Annotate and WhoAmI have a similar feature-set, but their strengths are quite
+different.
+
+**Annotate** is much more fully featured and can annotate models, routes,
+controllers, specs, factories, and much more. It's quite a bit slower (in my
+benchmarks), and it seems like it only takes the filename into account when
+determining how files should be annotated.
+
+**WhoAmI** can only annotate models, but it is faster and more accurate. It
+performs static analysis to see which files are models, and which models
+correlate to which tables.
 
 
 ## Installation
@@ -36,7 +52,7 @@ And then execute:
 
 Run `rake who_am_i` to update your model files.
 
-By default, `who_am_i` also runs after migrating your database.
+By default, `who_am_i` automatically runs after migrating your database.
 
 
 ## Development
@@ -57,4 +73,4 @@ Bug reports and pull requests are welcome on GitHub at
 ## License
 
 The gem is available as open source under the terms of the
-[MIT License](http://opensource.org/licenses/MIT).
+[MIT License](LICENSE.txt).
