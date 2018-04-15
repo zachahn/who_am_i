@@ -28,4 +28,9 @@ appraise "rails51" do
   gem "minitest", "~> 5.10"
 end
 
+appraise "rails52" do
+  gem "activerecord", "= 5.2.0"
+  gem "minitest", "~> 5.10"
+end
+
 # vim: syntax=ruby

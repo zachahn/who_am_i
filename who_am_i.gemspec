@@ -31,7 +31,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "appraisal"
   spec.add_development_dependency "foreigner"
 
-  spec.add_runtime_dependency "activerecord", ">= 3.2", "< 5.2"
+  spec.add_runtime_dependency "activerecord", ">= 3.2", "< 6.0"
   spec.add_runtime_dependency "parser"
   spec.add_runtime_dependency "proc_party"
 end
