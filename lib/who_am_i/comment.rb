@@ -43,7 +43,11 @@ module WhoAmI
       tt = TextTable.new(join: "    ", prefix: "#   ")
 
       @model_info.indices.each do |index|
-        tt.push([index.name, "(#{index.columns.join(", ")})"])
+        description = "(#{index.columns.join(", ")})"
+        if index.unique
+          description += " UNIQUE"
+        end
+        tt.push([index.name, description])
       end
 
       header =

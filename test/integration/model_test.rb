@@ -7,6 +7,7 @@ class ModelIntegrationTest < TestCase
     ActiveRecord::Schema.define do
       create_table :posts, force: true do |t|
         t.integer :user_id
+        t.text :title
         t.text :content
         t.timestamps null: false
       end
@@ -27,6 +28,8 @@ class ModelIntegrationTest < TestCase
       add_foreign_key :posts, :users
       add_foreign_key :comments, :posts
       add_foreign_key :comments, :users
+
+      add_index :posts, :title, unique: true
     end
   end
 
@@ -111,9 +114,14 @@ class ModelIntegrationTest < TestCase
         "#\n" \
         "#   id            integer     not null, primary key\n" \
         "#   user_id       integer\n" \
+        "#   title         text\n" \
         "#   content       text\n" \
         "#   created_at    datetime    not null\n" \
         "#   updated_at    datetime    not null\n" \
+        "#\n" \
+        "# Indices:\n" \
+        "#\n" \
+        "#   index_posts_on_title    (title) UNIQUE\n" \
         "#\n" \
         "\n" \
         "class Post < ApplicationRecord\n" \
