@@ -26,6 +26,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rubocop"
   spec.add_development_dependency "the_bath_of_zahn"
   spec.add_development_dependency "sqlite3"
+  spec.add_development_dependency "pg", "< 1.0.0"
   spec.add_development_dependency "pry-byebug"
   spec.add_development_dependency "m", "~> 1.5"
   spec.add_development_dependency "appraisal"
