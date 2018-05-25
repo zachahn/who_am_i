@@ -4,7 +4,7 @@ class CommentTest < TestCase
   include Migrate
 
   def setup
-    setup_ar!
+    setup_activerecord_sqlite!
   end
 
   def test_plain_table
