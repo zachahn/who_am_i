@@ -1,0 +1,19 @@
+# == Schema Info
+#
+# Table name: posts
+#
+#   id            integer     not null, primary key
+#   user_id       integer
+#   title         text
+#   content       text
+#   created_at    datetime    not null
+#   updated_at    datetime    not null
+#
+# Indices:
+#
+#   index_posts_on_title    (title) UNIQUE
+#
+
+class Post < ApplicationRecord
+  has_many :comments
+end

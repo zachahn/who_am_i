@@ -1,0 +1,9 @@
+---
+autorun:
+  enabled: false
+environment:
+  approach: manual
+enabled:
+  models:
+    paths:
+      - app/models/**/*.rb

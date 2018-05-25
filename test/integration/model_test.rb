@@ -33,70 +33,17 @@ class ModelIntegrationTest < TestCase
     end
   end
 
-  def original_application_record_content
-    @original_application_record_content ||=
-      "class ApplicationRecord < ActiveRecord::Base\n" \
-      "  self.abstract_class = true\n" \
-      "end\n"
-  end
-
-  def original_post_content
-    @original_post_content ||=
-      "class Post < ApplicationRecord\n" \
-      "  has_many :comments\n" \
-      "end\n"
-  end
-
-  def original_comment_content
-    @original_comment_content ||=
-      "# This is my favorite class!\n" \
-      "\n" \
-      "class Comment < ActiveRecord::Base\n" \
-      "  belongs_to :post\n" \
-      "end\n"
-  end
-
-  def original_user_content
-    @original_user_content ||=
-      "# == Schema Info\n" \
-      "#\n" \
-      "# Table name: users\n" \
-      "#\n" \
-      "#   id            integer     not null, primary key\n" \
-      "#   name          string      not null\n" \
-      "#   created_at    datetime    not null\n" \
-      "#   updated_at    datetime    not null\n" \
-      "#\n" \
-      "\n" \
-      "class User < ActiveRecord::Base\n" \
-      "  has_many :posts\n" \
-      "end\n"
-  end
-
-  def config_yml
-    @config_yml ||=
-      "---\n" \
-      "autorun:\n" \
-      "  enabled: false\n" \
-      "environment:\n" \
-      "  approach: manual\n" \
-      "enabled:\n" \
-      "  models:\n" \
-      "    paths:\n" \
-      "      - app/models/**/*.rb\n"
-  end
-
   def test_from_scratch
     migrate!
 
     in_tmpdir do |tmpdir|
       FileUtils.mkdir_p("app/models")
       FileUtils.mkdir_p("config")
-      File.write("app/models/application_record.rb", original_application_record_content)
-      File.write("app/models/post.rb", original_post_content)
-      File.write("app/models/comment.rb", original_comment_content)
-      File.write("app/models/user.rb", original_user_content)
-      File.write("config/who_am_i.yml", config_yml)
+      File.write("app/models/application_record.rb", fixture("application_record.original"))
+      File.write("app/models/post.rb", fixture("post.original"))
+      File.write("app/models/comment.rb", fixture("comment.original"))
+      File.write("app/models/user.rb", fixture("user.original"))
+      File.write("config/who_am_i.yml", fixture("config_yml"))
 
       rake_run do |rake|
         load "who_am_i/tasks.rake"
@@ -104,70 +51,35 @@ class ModelIntegrationTest < TestCase
       end
 
       assert_equal(
-        original_application_record_content,
+        fixture("application_record.original"),
         File.read("app/models/application_record.rb")
       )
       assert_equal(
-        "# == Schema Info\n" \
-        "#\n" \
-        "# Table name: posts\n" \
-        "#\n" \
-        "#   id            integer     not null, primary key\n" \
-        "#   user_id       integer\n" \
-        "#   title         text\n" \
-        "#   content       text\n" \
-        "#   created_at    datetime    not null\n" \
-        "#   updated_at    datetime    not null\n" \
-        "#\n" \
-        "# Indices:\n" \
-        "#\n" \
-        "#   index_posts_on_title    (title) UNIQUE\n" \
-        "#\n" \
-        "\n" \
-        "class Post < ApplicationRecord\n" \
-        "  has_many :comments\n" \
-        "end\n",
+        fixture("post.sqlite"),
         File.read("app/models/post.rb")
       )
 
       assert_equal(
-        "# == Schema Info\n" \
-        "#\n" \
-        "# Table name: comments\n" \
-        "#\n" \
-        "#   id            integer     not null, primary key\n" \
-        "#   post_id       integer\n" \
-        "#   user_id       integer\n" \
-        "#   name          string      not null\n" \
-        "#   content       text\n" \
-        "#   created_at    datetime    not null\n" \
-        "#   updated_at    datetime    not null\n" \
-        "#\n" \
-        "\n" \
-        "# This is my favorite class!\n" \
-        "\n" \
-        "class Comment < ActiveRecord::Base\n" \
-        "  belongs_to :post\n" \
-        "end\n",
+        fixture("comment.sqlite"),
         File.read("app/models/comment.rb")
       )
 
       assert_equal(
-        "# == Schema Info\n" \
-        "#\n" \
-        "# Table name: users\n" \
-        "#\n" \
-        "#   id            integer     not null, primary key\n" \
-        "#   name          string      not null\n" \
-        "#   created_at    datetime    not null\n" \
-        "#   updated_at    datetime    not null\n" \
-        "#\n" \
-        "\n" \
-        "class User < ActiveRecord::Base\n" \
-        "  has_many :posts\n" \
-        "end\n",
+        fixture("user.sqlite"),
         File.read("app/models/user.rb")
       )
     end
+  end
+
+  def fixture(fixture_name)
+    @fixture ||= {}
+
+    if @fixture.key?(fixture_name)
+      return @fixture[fixture_name]
+    end
+
+    path = File.expand_path(File.join("..", "fixtures", fixture_name), __dir__)
+
+    @fixture[fixture_name] = File.read(path)
   end
 end

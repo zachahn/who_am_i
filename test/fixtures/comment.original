@@ -1,0 +1,5 @@
+# This is my favorite class!
+
+class Comment < ActiveRecord::Base
+  belongs_to :post
+end
