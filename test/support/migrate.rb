@@ -4,22 +4,6 @@ module Migrate
     migration_schema
   end
 
-  def migration_schema
-    ActiveRecord::Schema.define do
-      create_table :post, force: true do |t|
-        t.integer :category_id
-        t.string :author, null: false, default: "Mr F"
-        t.text :content
-        t.timestamps null: false
-      end
-
-      create_table :categories, force: true do |t|
-        t.string :name
-        t.timestamps null: false
-      end
-    end
-  end
-
   def setup_activerecord_sqlite!
     ActiveRecord::Base.establish_connection(
       adapter: "sqlite3",
