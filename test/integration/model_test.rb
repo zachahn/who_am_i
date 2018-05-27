@@ -5,14 +5,14 @@ class ModelIntegrationTest < TestCase
 
   def migration_schema
     ActiveRecord::Schema.define do
-      create_table :posts, force: true do |t|
+      create_table :posts, force: :cascade do |t|
         t.integer :user_id
         t.text :title
         t.text :content
         t.timestamps null: false
       end
 
-      create_table :comments, force: true do |t|
+      create_table :comments, force: :cascade do |t|
         t.integer :post_id
         t.integer :user_id
         t.string :name, null: false
@@ -20,7 +20,7 @@ class ModelIntegrationTest < TestCase
         t.timestamps null: false
       end
 
-      create_table :users, force: true do |t|
+      create_table :users, force: :cascade do |t|
         t.string :name, null: false
         t.timestamps null: false
       end
@@ -33,9 +33,15 @@ class ModelIntegrationTest < TestCase
     end
   end
 
-  def test_from_scratch
-    migrate!
+  def test_sqlite
+    migrate_sqlite do
+      assert_works("sqlite")
+    end
+  end
 
+  private
+
+  def assert_works(expected_suffix)
     in_tmpdir do |tmpdir|
       FileUtils.mkdir_p("app/models")
       FileUtils.mkdir_p("config")
@@ -55,17 +61,17 @@ class ModelIntegrationTest < TestCase
         File.read("app/models/application_record.rb")
       )
       assert_equal(
-        fixture("post.sqlite"),
+        fixture("post.#{expected_suffix}"),
         File.read("app/models/post.rb")
       )
 
       assert_equal(
-        fixture("comment.sqlite"),
+        fixture("comment.#{expected_suffix}"),
         File.read("app/models/comment.rb")
       )
 
       assert_equal(
-        fixture("user.sqlite"),
+        fixture("user.#{expected_suffix}"),
         File.read("app/models/user.rb")
       )
     end

@@ -3,14 +3,12 @@ require "test_helper"
 class CommentTest < TestCase
   include Migrate
 
-  def setup
-    setup_activerecord_sqlite!
-  end
-
   def test_plain_table
-    ActiveRecord::Schema.define do
-      create_table :thingamajigs, force: true do |t|
-        t.string :name
+    define_migration do
+      ActiveRecord::Schema.define do
+        create_table :thingamajigs, force: true do |t|
+          t.string :name
+        end
       end
     end
 
@@ -23,19 +21,23 @@ class CommentTest < TestCase
       "#   name    string\n" \
       "#\n"
 
-    engine = WhoAmI::Comment.new(table_name: "thingamajigs")
-    result = engine.output
+    migrate_sqlite do
+      engine = WhoAmI::Comment.new(table_name: "thingamajigs")
+      result = engine.output
 
-    assert_equal(expected, result)
+      assert_equal(expected, result)
+    end
   end
 
   def test_index
-    ActiveRecord::Schema.define do
-      create_table :thingamajigs, force: true do |t|
-        t.string :name
-      end
+    define_migration do
+      ActiveRecord::Schema.define do
+        create_table :thingamajigs, force: true do |t|
+          t.string :name
+        end
 
-      add_index :thingamajigs, :name
+        add_index :thingamajigs, :name
+      end
     end
 
     expected =
@@ -51,24 +53,28 @@ class CommentTest < TestCase
       "#   index_thingamajigs_on_name    (name)\n" \
       "#\n"
 
-    engine = WhoAmI::Comment.new(table_name: "thingamajigs")
-    result = engine.output
+    migrate_sqlite do
+      engine = WhoAmI::Comment.new(table_name: "thingamajigs")
+      result = engine.output
 
-    assert_equal(expected, result)
+      assert_equal(expected, result)
+    end
   end
 
   def test_foreign_key
-    ActiveRecord::Schema.define do
-      create_table :authors, force: true do |t|
-        t.string :name, null: false, default: "Mr F"
-      end
+    define_migration do
+      ActiveRecord::Schema.define do
+        create_table :authors, force: true do |t|
+          t.string :name, null: false, default: "Mr F"
+        end
 
-      create_table :posts, force: true do |t|
-        t.integer :author_id, null: false
-        t.text :content
-      end
+        create_table :posts, force: true do |t|
+          t.integer :author_id, null: false
+          t.text :content
+        end
 
-      add_foreign_key :posts, :authors
+        add_foreign_key :posts, :authors
+      end
     end
 
     expected_authors =
@@ -90,14 +96,16 @@ class CommentTest < TestCase
       "#   content      text\n" \
       "#\n"
 
-    engine = WhoAmI::Comment.new(table_name: "authors")
-    result_authors = engine.output
+    migrate_sqlite do
+      engine = WhoAmI::Comment.new(table_name: "authors")
+      result_authors = engine.output
 
-    assert_equal(expected_authors, result_authors)
+      assert_equal(expected_authors, result_authors)
 
-    engine = WhoAmI::Comment.new(table_name: "posts")
-    result_posts = engine.output
+      engine = WhoAmI::Comment.new(table_name: "posts")
+      result_posts = engine.output
 
-    assert_equal(expected_posts, result_posts)
+      assert_equal(expected_posts, result_posts)
+    end
   end
 end

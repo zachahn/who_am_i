@@ -1,8 +1,10 @@
 $LOAD_PATH.unshift File.expand_path("../../lib", __FILE__)
 require "who_am_i"
+require "dotenv/load"
 
 require "fileutils"
 require "rake"
+require "pg"
 require "active_record"
 require "active_support/all"
 require_relative "support/migrate"
