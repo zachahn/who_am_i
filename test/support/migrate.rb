@@ -20,6 +20,38 @@ module Migrate
     ActiveRecord::Base.remove_connection
   end
 
+  def migrate_postgres
+    postgres_db_config ||= ActiveSupport::HashWithIndifferentAccess.new(
+      adapter: "postgresql",
+      encoding: "unicode",
+      database: ENV.fetch("POSTGRES_DATABASE"),
+      username: ENV["POSTGRES_USERNAME"],
+      password: ENV["POSTGRES_PASSWORD"],
+      pool: ENV.fetch("POSTGRES_POOL", "5"),
+      port: ENV.fetch("POSTGRES_PORT", "5432")
+    )
+
+    migration_setup(postgres_db_config)
+
+    capture_io do
+      ActiveRecord::Base.establish_connection(postgres_db_config)
+      ActiveRecord::Tasks::DatabaseTasks.create(postgres_db_config)
+      ActiveRecord::Base.establish_connection(postgres_db_config)
+    end
+
+    load_foreigner
+
+    migration_schema
+
+    yield
+  ensure
+    capture_io do
+      ActiveRecord::Base.remove_connection
+      ActiveRecord::Tasks::DatabaseTasks.drop(postgres_db_config)
+      ActiveRecord::Base.remove_connection
+    end
+  end
+
   def define_migration
     define_singleton_method(:migration_schema) do
       yield

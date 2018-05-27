@@ -33,6 +33,12 @@ class ModelIntegrationTest < TestCase
     end
   end
 
+  def test_postgres
+    migrate_postgres do
+      assert_works("pg")
+    end
+  end
+
   def test_sqlite
     migrate_sqlite do
       assert_works("sqlite")
