@@ -1,8 +1,3 @@
-appraise "rails32" do
-  gem "activerecord", "= 3.2.22"
-  gem "minitest", "~> 5.10"
-end
-
 appraise "rails40" do
   gem "activerecord", "= 4.0.13"
   gem "minitest", "~> 4.7"
