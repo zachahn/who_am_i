@@ -10,6 +10,11 @@
 #   created_at    datetime    not null
 #   updated_at    datetime    not null
 #
+# Foreign keys:
+#
+#   user_id    users.id    fk_rails_03de2dc08c
+#   post_id    posts.id    fk_rails_2fd19c0db7
+#
 
 # This is my favorite class!
 

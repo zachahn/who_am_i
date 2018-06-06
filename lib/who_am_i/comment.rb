@@ -5,7 +5,7 @@ module WhoAmI
     end
 
     def output
-      output_header + output_schema + output_indices
+      output_header + output_schema + output_indices + output_foreign_keys
     end
 
     private
@@ -52,6 +52,30 @@ module WhoAmI
 
       header =
         "# Indices:\n" \
+        "#\n"
+
+      header + tt.to_s + "#\n"
+    end
+
+    def output_foreign_keys
+      if @model_info.foreign_keys.empty?
+        return ""
+      end
+
+      tt = TextTable.new(join: "    ", prefix: "#   ")
+
+      @model_info.foreign_keys.each do |fk|
+        tt.push(
+          [
+            fk.column,
+            "#{fk.to_table}.#{fk.primary_key}",
+            fk.name,
+          ]
+        )
+      end
+
+      header =
+        "# Foreign keys:\n" \
         "#\n"
 
       header + tt.to_s + "#\n"

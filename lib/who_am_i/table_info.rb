@@ -21,5 +21,9 @@ module WhoAmI
     def indices
       @indices ||= ActiveRecord::Base.connection.indexes(@table_name)
     end
+
+    def foreign_keys
+      @foreign_keys ||= ActiveRecord::Base.connection.foreign_keys(@table_name)
+    end
   end
 end
