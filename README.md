@@ -1,5 +1,8 @@
 # WhoAmI
 
+Note: Development of WhoAmI has moved to
+[ahnnotate](https://github.com/zachahn/ahnnotate). Check it out!
+
 [![Build Status](https://travis-ci.org/zachahn/who_am_i.svg?branch=master)](https://travis-ci.org/zachahn/who_am_i)
 
 > Who am I? &mdash; <cite>Hansel</cite>
